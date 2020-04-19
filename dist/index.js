@@ -538,7 +538,9 @@ async function run() {
     let listRunJob = await octokit.actions.listRepoWorkflowRuns({
       owner,
       repo,
-      branch: branch
+      branch: branch,
+      status: 'queued in_progress',
+      per_page: 100
     });
     console.log(listRunJob);
 
