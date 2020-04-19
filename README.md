@@ -1,9 +1,8 @@
 auto-cancellation-running-action
 -------------
 
-Auto Cancellation allows you to only run builds for the latest commits in the queue.
+Auto Cancellation allows you to only run builds for the latest commits on a same branch.
 Reduce number of minutes usage of github action by killing all old actions running on the same branch and not finished.
-
 
 ## Usage
 You can create a `.github/workflows/auto-concellation.yml` file:
@@ -24,5 +23,10 @@ jobs:
 
 This will trigger the action when a pull request is opened or updated.
 
+## Package
+
+````
+npm run package
+````
 ## License
 Licensed under the [MIT license](https://github.com/outsideris/potential-conflicts-checker-action/blob/master/LICENSE).
