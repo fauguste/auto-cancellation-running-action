@@ -13,7 +13,7 @@ async function run() {
     const repo = context.repo.repo;
     let branch = context.payload.pull_request.head.ref;
     if(empty(myToken)) {
-      core.setFailed(`Action failed with error, please set githubToken token`);
+      core.setFailed('Action failed with error, please set githubToken token');
       return;
     }
     const octokit = new github.GitHub(myToken);
