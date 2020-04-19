@@ -539,8 +539,13 @@ async function run() {
       owner,
       repo,
       branch: branch,
-      status: 'queued in_progress',
       per_page: 100
+    });
+
+    listRunJob.data.workflow_runs.forEach(function(value, index, all) {
+      console.log("-------------------------------------");
+      console.log(value);
+      console.log("-------------------------------------");
     });
     console.log(listRunJob);
 
