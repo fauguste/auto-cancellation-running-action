@@ -1,10 +1,10 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'auto-cancellation-running-action'
+description: 'Auto Cancellation allows you to only run builds for the latest commits in the queue.
+               Reduce number of minutes usage of github action by killing all old actions running on the same branch and not finished.'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
-    required: true
-    default: '1000'
+  github-token:
+    description: The GitHub token used to create an authenticated client.
+
 outputs:
   time: # output will be available to future steps 
     description: 'The message to output'
