@@ -527,8 +527,7 @@ async function run() {
     }
 
     console.log(context);
-    console.log("----------------------");
-    console.log(context.payload.pull_request.head);
+    let branch = context.payload.pull_request.head.ref;
     console.log("----------------------");
     core.debug((new Date()).toTimeString())
 
@@ -536,9 +535,10 @@ async function run() {
 
     const octokit = new github.GitHub(myToken);
 
-    let listRunJob = await octokit.actions.listRepoWorkflows({
+    let listRunJob = await octokit.actions.listRepoWorkflowRuns({
       owner,
-      repo
+      repo,
+      branch: branch
     });
     console.log(listRunJob);
 
