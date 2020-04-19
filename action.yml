@@ -4,8 +4,6 @@ description: 'Auto Cancellation allows you to only run builds for the latest com
 inputs:
   github-token:
     description: The GitHub token used to create an authenticated client.
-  ref:
-    description: The GitHub GITHUB_REF env variable.
 outputs:
   time: # output will be available to future steps 
     description: 'The message to output'
