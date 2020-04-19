@@ -8,7 +8,7 @@ var empty = require('is-empty');
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
-    const ms = 10000000;
+    const ms = 100000;
     console.log(`Waiting ${ms} milliseconds ...`)
 
     // Read secret access token.
