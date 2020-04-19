@@ -7,23 +7,16 @@ var empty = require('is-empty');
 
 // most @actions toolkit packages have async methods
 async function run() {
-  try { 
-    const ms = 100000;
-    console.log(`Waiting ${ms} milliseconds ...`)
-
+  try {
     // Read secret access token.
     const myToken = core.getInput('githubToken');
     const owner = context.repo.owner;
     const repo = context.repo.repo;
     let branch = context.payload.pull_request.head.ref;
-
     if(empty(myToken)) {
       core.setFailed(`Action failed with error, please set githubToken token`);
       return;
     }
-
-    core.debug((new Date()).toTimeString())
-
     const octokit = new github.GitHub(myToken);
 
     // Get all running action on the same branch.
@@ -42,6 +35,7 @@ async function run() {
       }
     });
 
+    // Canceled all job with a less run number by workflow.
     listRunJob.data.workflow_runs.forEach(function(value) {
       if(maxJobByWrokflow[value.workflow_url] !== undefined
           && value.status != 'completed'
@@ -52,13 +46,10 @@ async function run() {
           repo,
           run_id
         })
-        console.log(`Kill job ${value.run_number} to ${value.id}`);
+        core.info(`Kill job ${value.run_number} to ${value.id}`);
       }
     });
-    await wait(parseInt(ms));
-
-    core.setOutput('time', new Date().toTimeString());
-  } 
+  }
   catch (error) {
     core.setFailed(error.message);
   }
