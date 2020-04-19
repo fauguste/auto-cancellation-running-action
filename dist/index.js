@@ -552,6 +552,12 @@ async function run() {
       if(maxJobByWrokflow[value.workflow_url] !== undefined
           && value.status != 'completed'
           && value.run_number < maxJobByWrokflow[value.workflow_url]) {
+        var workflowId = value.id;
+        octokit.actions.cancelWorkflowRun({
+          owner,
+          repo,
+          workflowId
+        })
         console.log(`Kill job ${value.run_number} to ${value.id}`);
       }
     });
