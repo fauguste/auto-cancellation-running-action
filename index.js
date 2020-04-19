@@ -14,6 +14,8 @@ async function run() {
     // Read secret access token.
     const myToken = core.getInput('githubToken');
     const ref = core.getInput('ref');
+    const owner = context.repo.owner;
+    const repo = context.repo.repo;
     if(empty(myToken)) {
       core.setFailed(`Action failed with error, please set githubToken token`);
       return;
@@ -29,6 +31,12 @@ async function run() {
     await wait(parseInt(ms));
 
     const octokit = new github.GitHub(myToken);
+
+    let listRunJob = await octokit.actions.listRepoWorkflows({
+      owner,
+      repo}
+    );
+    console.log(listRunJob);
     core.debug((new Date()).toTimeString())
 
     core.setOutput('time', new Date().toTimeString());
