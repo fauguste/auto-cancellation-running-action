@@ -8,7 +8,7 @@ var empty = require('is-empty');
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
-    const ms = core.getInput('milliseconds');
+    const ms = 10000;
     console.log(`Waiting ${ms} milliseconds ...`)
 
     // Read secret access token.
@@ -22,7 +22,7 @@ async function run() {
       core.setFailed(`Action failed with error, please set ref`);
       return;
     }
-    console.log(ref);
+    console.log(context);
 
     core.debug((new Date()).toTimeString())
 
