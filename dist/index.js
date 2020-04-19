@@ -543,15 +543,19 @@ async function run() {
       per_page: 100
     });
 
+    var maxJobByWrokflow = [];
     listRunJob.data.workflow_runs.forEach(function(value, index, all) {
       console.log("-------------------------------------");
+      if(maxJobByWrokflow[value.workflow_url] === undefined || value.run_number > maxJobByWrokflow[value.workflow_url]) {
+        maxJobByWrokflow[value.workflow_url] = value.run_number;
+      }
       console.log(value.run_number);
       console.log(value.status);
       console.log(value.workflow_url);
       console.log("-------------------------------------");
     });
-    console.log(listRunJob);
 
+    console.log(maxJobByWrokflow);
     core.debug((new Date()).toTimeString())
 
     core.setOutput('time', new Date().toTimeString());
