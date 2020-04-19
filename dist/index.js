@@ -535,6 +535,7 @@ async function run() {
 
     const octokit = new github.GitHub(myToken);
 
+    // Get all running action on the same branch.
     let listRunJob = await octokit.actions.listRepoWorkflowRuns({
       owner,
       repo,
@@ -544,7 +545,9 @@ async function run() {
 
     listRunJob.data.workflow_runs.forEach(function(value, index, all) {
       console.log("-------------------------------------");
-      console.log(value);
+      console.log(value.run_number);
+      console.log(value.status);
+      console.log(value.workflow_url);
       console.log("-------------------------------------");
     });
     console.log(listRunJob);
