@@ -513,7 +513,7 @@ var empty = __webpack_require__(474);
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
-    const ms = 1000;
+    const ms = 100000;
     console.log(`Waiting ${ms} milliseconds ...`)
 
     // Read secret access token.
@@ -529,7 +529,6 @@ async function run() {
 
     core.debug((new Date()).toTimeString())
 
-
     const octokit = new github.GitHub(myToken);
 
     // Get all running action on the same branch.
@@ -542,13 +541,13 @@ async function run() {
 
     // Get max run id by workflow.
     var maxJobByWrokflow = [];
-    listRunJob.data.workflow_runs.forEach(function(value, index, all) {
+    listRunJob.data.workflow_runs.forEach(function(value) {
       if(maxJobByWrokflow[value.workflow_url] === undefined || value.run_number > maxJobByWrokflow[value.workflow_url]) {
         maxJobByWrokflow[value.workflow_url] = value.run_number;
       }
     });
 
-    listRunJob.data.workflow_runs.forEach(function(value, index, all) {
+    listRunJob.data.workflow_runs.forEach(function(value) {
       if(maxJobByWrokflow[value.workflow_url] !== undefined
           && value.status != 'completed'
           && value.run_number < maxJobByWrokflow[value.workflow_url]) {
