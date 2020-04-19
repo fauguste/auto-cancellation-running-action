@@ -1,9 +1,11 @@
 name: 'auto-cancellation-running-action'
-description: 'Auto Cancellation allows you to only run builds for the latest commits in the queue.
-               Reduce number of minutes usage of github action by killing all old actions running on the same branch and not finished.'
+description: 'Auto Cancellation allows you to only run builds for the latest commits in the queue.'
 inputs:
   github-token:
     description: The GitHub token used to create an authenticated client.
 runs:
   using: 'node12'
   main: 'dist/index.js'
+branding:
+  icon: git-pull-request
+  color: blue
