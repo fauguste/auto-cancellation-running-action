@@ -1,7 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const context = github.context;
-const wait = require('./wait');
 var empty = require('is-empty');
 
 
