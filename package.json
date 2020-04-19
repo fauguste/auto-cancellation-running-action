@@ -1,7 +1,7 @@
 {
-  "name": "javascript-action",
+  "name": "auto-cancellation-running-action",
   "version": "1.0.0",
-  "description": "JavaScript Action Template",
+  "description": "Auto Cancellation allows you to only run builds for the latest commits in the queue. \n Reduce number of minutes usage of github action by killing all old actions running on the same branch and not finished.\n",
   "main": "index.js",
   "scripts": {
     "lint": "eslint index.js",
@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/actions/javascript-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.3"
+    "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.1",
