@@ -14,6 +14,7 @@ async function run() {
     const myToken = core.getInput('githubToken');
     if(empty(myToken)) {
       core.setFailed(`Action failed with error, please set githubToken token`);
+      return;
     }
     core.debug((new Date()).toTimeString())
 
