@@ -513,7 +513,7 @@ var empty = __webpack_require__(474);
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
-    const ms = 100000;
+    const ms = 1000;
     console.log(`Waiting ${ms} milliseconds ...`)
 
     // Read secret access token.
@@ -552,11 +552,11 @@ async function run() {
       if(maxJobByWrokflow[value.workflow_url] !== undefined
           && value.status != 'completed'
           && value.run_number < maxJobByWrokflow[value.workflow_url]) {
-        var workflowId = value.id;
+        var run_id = value.id;
         octokit.actions.cancelWorkflowRun({
           owner,
           repo,
-          workflowId
+          run_id
         })
         console.log(`Kill job ${value.run_number} to ${value.id}`);
       }
