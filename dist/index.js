@@ -527,8 +527,9 @@ async function run() {
     }
 
     console.log(context);
-    console.log(context.payload.pull_request);
-
+    console.log("----------------------");
+    console.log(context.payload.pull_request.head);
+    console.log("----------------------");
     core.debug((new Date()).toTimeString())
 
     await wait(parseInt(ms));
