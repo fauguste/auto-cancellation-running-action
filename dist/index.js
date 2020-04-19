@@ -507,6 +507,7 @@ const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const context = github.context;
 const wait = __webpack_require__(949);
+var empty = __webpack_require__(474);
 
 
 // most @actions toolkit packages have async methods
@@ -515,9 +516,15 @@ async function run() {
     const ms = core.getInput('milliseconds');
     console.log(`Waiting ${ms} milliseconds ...`)
     console.log(context);
+    const myToken = core.getInput('githubToken');
+    if(empty(myToken)) {
+      core.setFailed(`Action failed with error, please set githubToken token`);
+    }
     core.debug((new Date()).toTimeString())
 
     await wait(parseInt(ms));
+
+    const octokit = new github.GitHub(myToken);
     core.debug((new Date()).toTimeString())
 
     core.setOutput('time', new Date().toTimeString());
@@ -7329,6 +7336,92 @@ function authenticationBeforeRequest(state, options) {
   const secret = encodeURIComponent(state.auth.secret);
   options.url += `client_id=${key}&client_secret=${secret}`;
 }
+
+
+/***/ }),
+
+/***/ 474:
+/***/ (function(module) {
+
+
+/**
+ * Has own property.
+ *
+ * @type {Function}
+ */
+
+var has = Object.prototype.hasOwnProperty
+
+/**
+ * To string.
+ *
+ * @type {Function}
+ */
+
+var toString = Object.prototype.toString
+
+/**
+ * Test whether a value is "empty".
+ *
+ * @param {Mixed} val
+ * @return {Boolean}
+ */
+
+function isEmpty(val) {
+  // Null and Undefined...
+  if (val == null) return true
+
+  // Booleans...
+  if ('boolean' == typeof val) return false
+
+  // Numbers...
+  if ('number' == typeof val) return val === 0
+
+  // Strings...
+  if ('string' == typeof val) return val.length === 0
+
+  // Functions...
+  if ('function' == typeof val) return val.length === 0
+
+  // Arrays...
+  if (Array.isArray(val)) return val.length === 0
+
+  // Errors...
+  if (val instanceof Error) return val.message === ''
+
+  // Objects...
+  if (val.toString == toString) {
+    switch (val.toString()) {
+
+      // Maps, Sets, Files and Errors...
+      case '[object File]':
+      case '[object Map]':
+      case '[object Set]': {
+        return val.size === 0
+      }
+
+      // Plain objects...
+      case '[object Object]': {
+        for (var key in val) {
+          if (has.call(val, key)) return false
+        }
+
+        return true
+      }
+    }
+  }
+
+  // Anything else...
+  return false
+}
+
+/**
+ * Export `isEmpty`.
+ *
+ * @type {Function}
+ */
+
+module.exports = isEmpty
 
 
 /***/ }),
