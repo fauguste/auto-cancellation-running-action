@@ -7,6 +7,10 @@ var empty = require('is-empty');
 // most @actions toolkit packages have async methods
 async function run() {
   try {
+    // Do nothing if event is not a pull request.
+    if (context.eventName !== 'pull_request') {
+      return;
+    }
     // Read secret access token.
     const myToken = core.getInput('githubToken');
     const owner = context.repo.owner;
