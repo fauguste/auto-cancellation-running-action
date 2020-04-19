@@ -13,7 +13,7 @@ on: pull_request
 
 jobs:
   build:
-    name: potential-conflicts-checker
+    name: auto-cancellation-running-action
     runs-on: ubuntu-latest
     steps:
       - uses: fauguste/auto-cancellation-running-action@0.1.0
