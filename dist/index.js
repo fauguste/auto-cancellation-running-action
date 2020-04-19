@@ -529,7 +529,6 @@ async function run() {
 
     core.debug((new Date()).toTimeString())
 
-    await wait(parseInt(ms));
 
     const octokit = new github.GitHub(myToken);
 
@@ -556,6 +555,7 @@ async function run() {
         console.log(`Kill job ${value.run_number} to ${value.id}`);
       }
     });
+    await wait(parseInt(ms));
 
     core.setOutput('time', new Date().toTimeString());
   } 
