@@ -515,12 +515,20 @@ async function run() {
   try { 
     const ms = core.getInput('milliseconds');
     console.log(`Waiting ${ms} milliseconds ...`)
-    console.log(context);
+
+    // Read secret access token.
     const myToken = core.getInput('githubToken');
+    const ref = core.getInput('ref');
     if(empty(myToken)) {
       core.setFailed(`Action failed with error, please set githubToken token`);
       return;
     }
+    if(empty(ref)) {
+      core.setFailed(`Action failed with error, please set ref`);
+      return;
+    }
+    console.log(ref);
+
     core.debug((new Date()).toTimeString())
 
     await wait(parseInt(ms));
