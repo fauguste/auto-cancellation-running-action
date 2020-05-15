@@ -16,7 +16,7 @@ jobs:
     name: auto-cancellation-running-action
     runs-on: ubuntu-latest
     steps:
-      - uses: fauguste/auto-cancellation-running-action@0.1.2
+      - uses: fauguste/auto-cancellation-running-action@0.1.4
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 ```
