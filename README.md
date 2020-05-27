@@ -5,14 +5,14 @@ Auto Cancellation allows you to only run builds for the latest commits on a same
 Reduce number of minutes usage of github action by killing all old actions running on the same branch and not finished.
 
 ## Usage
-You can create a `.github/workflows/auto-concellation.yml` file:
+You can create a `.github/workflows/auto-cancellation.yml` file:
 
 ```
-name: auto concellation running job
+name: auto cancellation running job
 on: pull_request
 
 jobs:
-  build:
+  cancel:
     name: auto-cancellation-running-action
     runs-on: ubuntu-latest
     steps:
