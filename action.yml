@@ -3,6 +3,8 @@ description: 'Auto Cancellation allows you to only run builds for the latest com
 inputs:
   githubToken:
     description: The GitHub token used to create an authenticated client.
+    required: false
+    default: ${{ github.token }}
 runs:
   using: 'node12'
   main: 'dist/index.js'
