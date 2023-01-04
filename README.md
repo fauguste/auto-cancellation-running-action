@@ -1,6 +1,8 @@
 auto-cancellation-running-action
 -------------
 
+DEPRECATED : Use native [github action functionnalty](https://docs.github.com/en/actions/using-jobs/using-concurrency)
+
 Auto Cancellation allows you to only run builds for the latest commits on a same branch.
 Reduce number of minutes usage of github action by killing all old actions running on the same branch and not finished.
 
